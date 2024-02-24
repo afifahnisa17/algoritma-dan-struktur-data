@@ -1,4 +1,0 @@
-# LAPORAN ALGORITMA DAN STRUKTUR DATA
-# PERTEMUAN 1
-
-<img src="PICTURES/logopolinema.png">

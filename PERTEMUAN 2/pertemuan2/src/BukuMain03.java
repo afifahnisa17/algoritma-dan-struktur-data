@@ -15,10 +15,15 @@ public class BukuMain03 {
         Buku03 bk2 = new Buku03("Self Reward", "Maheera Ayesha", 160, 29, 59000);
         bk2.terjual(11);
         bk2.tampilInformasi();
+        
 
         Buku03 Afifah = new Buku03("Rembulan Tenggelam di Wajahmu", "Tere Liye", 300, 4, 90000);
-        Afifah.terjual(5);
         Afifah.tampilInformasi();
+        Afifah.terjual(5);
+
+        System.out.println("Total Harga: " + Afifah.hitungHargaTotal());
+        System.out.println("Total Diskon: " + Afifah.hitungDiskon());
+        System.out.println("Harga Bayar: " + Afifah.hitungHargaBayar());
     }
 }
 
