@@ -2,7 +2,7 @@ package LatihanPraktikum;
 
 public class HotelService {
     Hotel namaHotel[] = new Hotel[10];
-    int jml;
+    int jml; // Jumlah Objek Hotel
     
     void tambah(Hotel H){
         if(jml<namaHotel.length){
@@ -24,6 +24,7 @@ public class HotelService {
         }
     }
 
+    // Harga Terendah Hingga Tertinggi Menggunakan Bubble Sort
     void HargabubbleSort(){
         for(int i=0; i<jml-1; i++){
                         for(int j=1; j <jml -i; j++){
@@ -36,6 +37,7 @@ public class HotelService {
                 }
     }
 
+    // Rating Tertinggi Hingga Terendah Menggunakan Selection Sort
     void RatingselectionSort(){
         for(int i=0; i<jml - 1; i++){
             int idxMax = i;
