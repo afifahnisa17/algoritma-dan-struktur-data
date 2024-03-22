@@ -1,6 +1,6 @@
 
 <h1 align="center">LAPORAN ALGORITMA DAN STRUKTUR DATA
-PERTEMUAN 1 - KONSEP DASAR PEMROGRAMAN
+PERTEMUAN 3 - ARRAY OF OBJECT
 
 <br>
 <img src="picture/logopolinema.png" height="300">

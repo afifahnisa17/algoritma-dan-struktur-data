@@ -1,5 +1,5 @@
 <h1 align="center">LAPORAN ALGORITMA DAN STRUKTUR DATA
-PERTEMUAN 1 - KONSEP DASAR PEMROGRAMAN
+PERTEMUAN 5 - BRUTE FORCE DAN DIVIDE CONQUER
 
 <br>
 <img src="picture/logopolinema.png" height="300">
