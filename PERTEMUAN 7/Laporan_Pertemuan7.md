@@ -104,4 +104,17 @@ dengan menggunakan algoritma Sorting (bebas pilih algoritma sorting apapun)! Seh
 ketika input data acak, maka algoritma searching akan tetap berjalan
 ### - Buat aturan untuk mendeteksi hasil pencarian judul buku yang lebih dari 1 hasil dalambentuk kalimat peringatan! Pastikan algoritma yang diterapkan sesuai dengan kasus yang diberikan!
 
+### KODE PROGRAM
+<img src="picture/code - ModifikasiBuku.png">
+<img src="picture/code - ModifikasiPencarianBuku.png">
+<img src="picture/code - ModifikasiBukuMain.png">
+
+### OUTPUT
+### SEARCH DENGAN KODE BUKU
+<img src="picture/output - SearchKode.png">
+
+### SEACH DENGAN JUDUL BUKU
+<img src="picture/output - search judul 1.png">
+<img src="picture/output - search judul 2.png">
+
 

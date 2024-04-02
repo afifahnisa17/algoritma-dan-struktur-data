@@ -1,4 +1,4 @@
-package ModifikasiBuku;
+package LatihanPraktikum;
 
 public class ModifikasiBuku {
     String kodeBuku;
@@ -23,5 +23,4 @@ public class ModifikasiBuku {
         System.out.println("Pengarang       : " + pengarang );
         System.out.println("Stock           : " + stock);
     }
-
 }

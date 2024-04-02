@@ -1,4 +1,4 @@
-package ModifikasiBuku;
+package LatihanPraktikum;
 import java.util.Scanner;
 
 public class ModifikasiBukuMain {
@@ -6,7 +6,7 @@ public class ModifikasiBukuMain {
     Scanner s = new Scanner(System.in);
     Scanner s1 = new Scanner(System.in);
 
-    ModifikasiPencarianBuku03 data = new ModifikasiPencarianBuku03();
+    ModifikasiPencarianBuku data = new ModifikasiPencarianBuku();
     int jumBuku = 5;
 
     System.out.println("----------------------------");
@@ -41,24 +41,37 @@ public class ModifikasiBukuMain {
         switch (choice) {
             case 1 :
                 System.out.println("===============================");
-                System.out.println("Pencarian Data  :");
-                System.out.println("Masukkan Kode Buku yang dicari: ");
-                System.out.print("Kode Buku   : ");
+                System.out.println("Pencarian Data:");
+                System.out.print("Masukkan Kode Buku yang dicari: ");
                 String cari = s1.nextLine();
-                data.FindSeqSearch(cari);
-                
+                int posisi = data.FindSeqSearch(cari);
+            
                 System.out.println("===============================");
                 System.out.println("Menggunakan Sequential Search Method FindBuku");
-                ModifikasiBuku dataBuku = data.FindBuku(cari);
-                dataBuku.tampilDataBuku();
+            
+                if (posisi != -1) {
+                    ModifikasiBuku dataBuku = data.FindBuku(cari);
+                    if (dataBuku != null) {
+                        dataBuku.tampilDataBuku();
+                    } else {
+                        System.out.println("Data tidak ditemukan");
+                    }
+                } else {
+                    System.out.println("Data tidak ditemukan");
+                }
+            
                 System.out.println();
-                
                 System.out.println("===============================");
                 System.out.println("Menggunakan Binary Search");
-                int posisi = data.FindBinarySearch(cari, 0, jumBuku -1); // Menggunakan kembali variabel yang sudah didefinisikan sebelumnya
-                data.TampilData(cari, posisi);
+                String result = data.FindBinarySearch(cari, 0, jumBuku - 1);
+                if (result != null) {
+                    int binarySearchPos = data.FindSeqSearch(result); // Cari posisi menggunakan Sequential Search
+                    data.TampilData(result, binarySearchPos);
+                } else {
+                    System.out.println("Data tidak ditemukan");
+                }
+                break;
             
-
             case 2:
                 System.out.println();
                 System.out.println("===============================");
@@ -98,4 +111,3 @@ public class ModifikasiBukuMain {
     }   
     
 }
-
