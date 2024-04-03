@@ -268,3 +268,29 @@ No.Abs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;03</h2>
     Kode unik dalam biner: 1101
 ```
 ### 2.2.3 PERTANYAAN
+### 1. Pada method konversiDesimalKeBiner, ubah kondisi perulangan menjadi while (kode != 0), bagaimana hasilnya? Jelaskan alasannya!
+### Jawaban:
+-  Saat diberikan angka yang lebih dari nol, maka program akan berjalan seperti sebelumnya. Hal tersebut dikarenakan kode sebelumnya akan menjalankan perintah untuk angka yang lebih dari nol.
+- Saat diberikan angka bernilai kurang dari nol, maka output program yaitu sebagai berikut. Hal tersebut dikarenakan, program tidak bisa mengeksekusi angka yang kurang dari nol.
+```
+    Kode unik dalam biner: -1-10-1
+```
+- Saat diberikan angka nol, maka tidak ada output yang ditempilkan.
+### 2. Jelaskan alur kerja dari method konversiDesimalKeBiner!
+### Jawaban:
+    Berikut adalah alur dari method konversiDesimalKeBiner
+
+    1. Metode `konversiDesimalKeBiner` menerima satu parameter `kode` yang merupakan bilangan desimal yang ingin dikonversi menjadi bilangan biner. Tipe data parameter tersebut adalah `int`.
+
+    2. Dalam metode tersebut, sebuah objek `StackKonversi` dibuat untuk menyimpan sisa pembagian bilangan desimal dengan 2. Ini adalah bagian dari algoritma konversi desimal ke biner dengan menggunakan operasi pembagian dan modulus.
+
+    3. Selama nilai `kode` masih lebih besar dari 0, langkah-langkah berikut diulang:
+    - Hitung sisa pembagian (`sisa`) dari `kode` dibagi dengan 2.
+    - Sisa tersebut kemudian dimasukkan ke dalam stack menggunakan metode `push`.
+    - Nilai `kode` diperbarui dengan pembagian bilangan desimal tersebut dengan 2, sehingga pada iterasi berikutnya, kita akan mendapatkan digit berikutnya dari biner.
+
+    4. Setelah selesai iterasi pertama, dilakukan iterasi kedua dengan tujuan untuk mengambil nilai dari stack dan membangun string biner.
+    - String `biner` dibuat.
+    - Selama stack tidak kosong (`!stack.isEmpty()`), digit dari biner diambil dari stack menggunakan metode `pop()`, dan ditambahkan ke string `biner`.
+
+    5. String `biner` yang berisi representasi biner dari bilangan desimal tersebut dikembalikan sebagai output dari metode.
