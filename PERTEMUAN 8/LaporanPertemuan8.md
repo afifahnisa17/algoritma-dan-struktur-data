@@ -294,3 +294,169 @@ No.Abs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;03</h2>
     - Selama stack tidak kosong (`!stack.isEmpty()`), digit dari biner diambil dari stack menggunakan metode `pop()`, dan ditambahkan ke string `biner`.
 
     5. String `biner` yang berisi representasi biner dari bilangan desimal tersebut dikembalikan sebagai output dari metode.
+
+### 2.3 PERCOBAAN 3: KONVERSI NOTASI INFIX KE POSTFIX
+### 2.3.1 LANGKAH-LANGKAH PERCOBAAN
+### CLASS Postfix3
+```java
+    package Konversi_Infix_Postfix;
+
+    public class Postfix3 {
+        int n, top;
+        char stack[];
+
+        Postfix3(int total){
+            n = total;
+            top = -1;
+            stack = new char[10];
+            push ('(');
+        }
+
+        public void push (char c){
+            top++;
+            stack[top] = c;
+        }
+
+        public char pop(){
+            char item = stack[top];
+            top--;
+            return item;
+        }
+
+        public boolean IsOperand(char c){
+            if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z') 
+                || (c >= '0' && c <= '9') || c == ' ' || c == '.'){
+                    return true;
+            } else{
+                return false;
+            }
+        }
+
+        public boolean IsOperator(char c){
+            if(c == '^' || c == '%' || c == '/' ||c == '*' || c == '-' || c == '+' ){
+                return true;
+            } else{
+                return false;
+            }
+        }
+
+        public int derajat(char c){
+            switch (c){
+                case '^':
+                    return 3;
+                case '%':
+                    return 2;
+                case '/':
+                    return 2;
+                case '*':
+                    return 2;
+                case '-':
+                    return 1;
+                case '+':
+                    return 1;
+                default:
+                    return 0;
+            }
+        }
+
+        public String konversi(String Q){
+            String P = " ";
+            char c;
+
+            for(int i = 0; i < n; i++){
+                c = Q.charAt(i);
+
+                if(IsOperand(c)){
+                    P = P + c;
+                }
+                if ( c == '('){
+                    push(c);
+                }
+                if ( c == ')'){
+                    while (stack[top] != '('){
+                        P = P + pop();
+                    }
+                    pop();
+                }
+                if (IsOperator(c)){
+                    while (derajat(stack[top]) >= derajat(c)){
+                        P = P + pop();
+                    }
+                    push(c);
+                }
+            }
+            return P;
+        }
+    }
+
+```
+
+### CLASS PostfixMain3
+```java
+    package Konversi_Infix_Postfix;
+    import java.util.Scanner;
+
+    public class PostfixMain3 {
+        public static void main(String[] args) {
+            Scanner sc3 = new Scanner(System.in);
+            String P, Q;
+            System.out.print("Masukkan ekspresi matematika (infix): ");
+            Q = sc3.nextLine();
+            Q = Q.trim();
+            Q = Q + ")";
+
+            int total = Q.length();
+            Postfix3 post = new Postfix3(total);
+            P = post.konversi(Q);
+            System.out.println("Postfix: " + P);
+
+        }
+        
+    }
+
+```
+### 2.3.2 VERIFIKASI HASIL PERCOBAAN
+```
+    Masukkan ekspresi matematika (infix): a+b*(c+d-e)/f
+    Postfix:  abcd+e-*f/+
+```
+### 2.3.3 PERTANYAAN
+### 1. Pada method derajat, mengapa return value beberapa case bernilai sama? Apabila returnvalue diubah dengan nilai berbeda-beda setiap case-nya, apa yang terjadi?
+### Jawaban: 
+    Return value beberapa case bernilai sama karena menunjukkan tingkat prioritas dari suatu operasi. Semakin tinggi nilai suatu operasi, maka semakin tinggi pula prioritas operasi tersebut. Dalam method derajat, return value yang memiliki nilai sama berarti memiliki kesetaraan/prioritas yang dengan operasi dengan return value yang sama. Sebagai contoh, operasi "%", "/", dan "*" memiliki return value yang sama sehingga ketiga operasi tersebut memiliki prioritas yang sama. Apabila return value memiliki nilai yang berbeda-beda setiap case nya, maka tingkat prioritas juga berbeda, dan tidak sesuai dengan kaidah prioritas suatu operasi.
+
+### 2. Jelaskan alur kerja method konversi!
+### Jawaban:
+    Berikut adalah alur kerja method konversi:
+
+    1. Inisialisasi Variabel**: 
+        - `P` adalah string yang akan menyimpan ekspresi postfix.
+        - `c` adalah variabel karakter yang digunakan untuk membaca setiap karakter dari ekspresi input `Q`.
+
+    2. Iterasi Melalui Ekspresi Input**:
+        - Iterasi dilakukan melalui setiap karakter dari ekspresi input `Q`.
+
+    3. Memeriksa Karakter**:
+        - Jika karakter adalah operand (bilangan atau variabel), maka karakter tersebut langsung ditambahkan ke dalam string `P`.
+        - Jika karakter adalah tanda kurung buka `(`, maka tanda kurung tersebut dimasukkan ke dalam stack.
+        - Jika karakter adalah tanda kurung tutup `)`, maka dilakukan proses pengosongan stack hingga menemukan tanda kurung buka yang sesuai.
+        - Jika karakter adalah operator, maka dilakukan pengecekan derajat operator pada stack. Jika derajat operator pada stack lebih besar atau sama dengan derajat operator yang sedang diproses, maka operator pada stack dihapus dan dimasukkan ke dalam string `P`.
+
+    4. Pengembalian String Hasil**:
+        - Setelah iterasi selesai, hasil ekspresi postfix disimpan dalam string `P` dan dikembalikan.
+
+    5. Fungsi Tambahan**: 
+        - Fungsi `IsOperand` digunakan untuk memeriksa apakah suatu karakter adalah operand.
+        - Fungsi `IsOperator` digunakan untuk memeriksa apakah suatu karakter adalah operator.
+        - Fungsi `derajat` digunakan untuk mendapatkan prioritas (derajat) operator.
+
+
+### 3. Pada method konversi, apa fungsi dari potongan kode berikut?
+```java
+    c = Q.charAt(i);
+```
+### Jawaban: 
+    Pernyataan `c = Q.charAt(i);` memiliki maksud untuk mengambil karakter pada posisi indeks `i` dari string `Q` dan menyimpannya ke dalam variabel `c`. 
+
+    Dalam konteks fungsi `konversi`, `Q` adalah ekspresi matematika dalam bentuk string yang ingin diubah dari infix menjadi postfix. Dengan menggunakan `charAt(i)`, kita dapat mengakses karakter satu per satu dari string tersebut selama proses iterasi. Variabel `c` kemudian digunakan untuk mewakili karakter saat ini yang sedang diproses dalam ekspresi tersebut.
+
