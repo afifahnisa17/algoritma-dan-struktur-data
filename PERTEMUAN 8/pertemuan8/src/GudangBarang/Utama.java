@@ -35,7 +35,7 @@ public class Utama {
                     break;
                 
                 case 2:
-                    gudang.ambiBarang();
+                    gudang.ambilBarang();
                     break;
 
                 case 3:
