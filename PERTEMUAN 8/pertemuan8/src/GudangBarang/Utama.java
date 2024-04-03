@@ -4,7 +4,10 @@ import java.util.Scanner;
 public class Utama {
     public static void main(String[] args) {
         Scanner sc3 = new Scanner(System.in);
-        Gudang3 gudang = new Gudang3(7);
+        System.out.print("Tentukan Kapasitas Gudang: ");
+        int Kapasitas = sc3.nextInt();
+        Gudang3 gudang = new Gudang3(Kapasitas);
+        System.out.println("Kapasitas gudang saat ini adalah " + Kapasitas);
         boolean konfirmasi  = true;
 
         while (konfirmasi){
@@ -12,7 +15,8 @@ public class Utama {
             System.out.println("1. Tambah Barang");
             System.out.println("2. Ambil Barang");
             System.out.println("3. Tampilkan Tumpukan Barang");
-            System.out.println("4. Keluar");
+            System.out.println("4. Lihat Barang Teratas");
+            System.out.println("5. Keluar");
             System.out.print("Pilih operasi: ");
             int pilihan = sc3.nextInt();
             sc3.nextLine();
@@ -39,6 +43,10 @@ public class Utama {
                     break;
                 
                 case 4:
+                    gudang.lihatBarangTeratas();
+                    break;
+
+                case 5:
                     konfirmasi = false;
                     break;
 

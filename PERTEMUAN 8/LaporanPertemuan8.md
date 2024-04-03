@@ -67,6 +67,103 @@ No.Abs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;03</h2>
 ### 3. Mengapa perlu pengecekan kondisi !cekKosong() pada method tampilkanBarang? Kalau kondisi tersebut dihapus, apa dampaknya?
 ### Jawaban:
     Pengecekan kondisi !cekKosong() perlu dilakukan untuk mengecek data dalam stack kosong atau tidak. Apabila dihapus, maka tidak akan terdeteksi barang yang aada dalam stack kosong atau ada isinya.
-    
+
 ### 4. Modifikasi kode program pada class Utama sehingga pengguna juga dapat memilih operasi lihat barang teratas, serta dapat secara bebas menentukan kapasitas gudang!
 ### Jawaban: 
+    Berikut adalah kode program modifikasi:
+```java
+   
+    public class Utama {
+        public static void main(String[] args) {
+            Scanner sc3 = new Scanner(System.in);
+            System.out.print("Tentukan Kapasitas Gudang: ");
+            int Kapasitas = sc3.nextInt();
+            Gudang3 gudang = new Gudang3(Kapasitas);
+            System.out.println("Kapasitas gudang saat ini adalah " + Kapasitas);
+            boolean konfirmasi  = true;
+
+            while (konfirmasi){
+                System.out.println("\nMenu:");
+                System.out.println("1. Tambah Barang");
+                System.out.println("2. Ambil Barang");
+                System.out.println("3. Tampilkan Tumpukan Barang");
+                System.out.println("4. Lihat Barang Teratas");
+                System.out.println("5. Keluar");
+                System.out.print("Pilih operasi: ");
+                int pilihan = sc3.nextInt();
+                sc3.nextLine();
+
+                switch (pilihan) {
+                    case 1:
+                        System.out.print("Masukkan kode barang  : ");
+                        int kode = sc3.nextInt();
+                        sc3.nextLine();
+                        System.out.print("Masukkan nama barang  : ");
+                        String nama = sc3.nextLine();
+                        System.out.print("Masukkan nama kategori: ");
+                        String kategori = sc3.nextLine();
+                        Barang3 barangBaru = new Barang3(kode, nama, kategori);
+                        gudang.tambahBarang(barangBaru);
+                        break;
+                    
+                    case 2:
+                        gudang.ambiBarang();
+                        break;
+
+                    case 3:
+                        gudang.tampilkanBarang();
+                        break;
+                    
+                    case 4:
+                        gudang.lihatBarangTeratas();
+                        break;
+
+                    case 5:
+                        konfirmasi = false;
+                        break;
+
+                    default:
+                        System.out.println("Pilihan tidak valid. Silakan coba lagi.");
+                        break;
+                }
+            }
+        }
+    }
+```
+    Outputnya yaitu sebagai berikut:
+```java
+    Tentukan Kapasitas Gudang: 6
+    Kapasitas gudang saat ini adalah 6
+
+    Menu:
+    1. Tambah Barang
+    2. Ambil Barang
+    3. Tampilkan Tumpukan Barang
+    4. Lihat Barang Teratas
+    5. Keluar
+    Pilih operasi: 1
+    Masukkan kode barang  : 21
+    Masukkan nama barang  : Jaket
+    Masukkan nama kategori: Pakaian
+    Barang Jaket berhasil ditambahkan ke Gudang
+
+    Menu:
+    1. Tambah Barang
+    2. Ambil Barang
+    3. Tampilkan Tumpukan Barang
+    4. Lihat Barang Teratas
+    5. Keluar
+    Pilih operasi: 1
+    Masukkan kode barang  : 31
+    Masukkan nama barang  : Oppo A1k
+    Masukkan nama kategori: Smartphone
+    Barang Oppo A1k berhasil ditambahkan ke Gudang
+
+    Menu:
+    1. Tambah Barang
+    2. Ambil Barang
+    3. Tampilkan Tumpukan Barang
+    4. Lihat Barang Teratas
+    5. Keluar
+    Pilih operasi: 5
+```
