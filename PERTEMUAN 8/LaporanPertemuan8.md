@@ -429,20 +429,20 @@ No.Abs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;03</h2>
 ### Jawaban:
     Berikut adalah alur kerja method konversi:
 
-    1. Inisialisasi Variabel**: 
+    1. Inisialisasi Variabel: 
         - `P` adalah string yang akan menyimpan ekspresi postfix.
         - `c` adalah variabel karakter yang digunakan untuk membaca setiap karakter dari ekspresi input `Q`.
 
-    2. Iterasi Melalui Ekspresi Input**:
+    2. Iterasi Melalui Ekspresi Input:
         - Iterasi dilakukan melalui setiap karakter dari ekspresi input `Q`.
 
-    3. Memeriksa Karakter**:
+    3. Memeriksa Karakter:
         - Jika karakter adalah operand (bilangan atau variabel), maka karakter tersebut langsung ditambahkan ke dalam string `P`.
         - Jika karakter adalah tanda kurung buka `(`, maka tanda kurung tersebut dimasukkan ke dalam stack.
         - Jika karakter adalah tanda kurung tutup `)`, maka dilakukan proses pengosongan stack hingga menemukan tanda kurung buka yang sesuai.
         - Jika karakter adalah operator, maka dilakukan pengecekan derajat operator pada stack. Jika derajat operator pada stack lebih besar atau sama dengan derajat operator yang sedang diproses, maka operator pada stack dihapus dan dimasukkan ke dalam string `P`.
 
-    4. Pengembalian String Hasil**:
+    4. Pengembalian String Hasil:
         - Setelah iterasi selesai, hasil ekspresi postfix disimpan dalam string `P` dan dikembalikan.
 
     5. Fungsi Tambahan**: 
@@ -460,3 +460,249 @@ No.Abs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;03</h2>
 
     Dalam konteks fungsi `konversi`, `Q` adalah ekspresi matematika dalam bentuk string yang ingin diubah dari infix menjadi postfix. Dengan menggunakan `charAt(i)`, kita dapat mengakses karakter satu per satu dari string tersebut selama proses iterasi. Variabel `c` kemudian digunakan untuk mewakili karakter saat ini yang sedang diproses dalam ekspresi tersebut.
 
+### 2.4 LATIHAN PRAKTIKUM
+### Perhatikan dan gunakan kembali kode program pada Percobaan 1. Tambahkan dua method berikutpada class Gudang:
+- ### Method lihatBarangTerbawah digunakan untuk mengecek barang pada tumpukan terbawah
+### KODE PROGRAN
+```java
+    public Barang3 lihatBarangTerbawah(){
+            if(!cekKosong()){
+                Barang3 barangTerbawah = tumpukan[0];
+                System.out.println("Barang terbawah: " + barangTerbawah.nama);
+                return barangTerbawah;
+            } else{
+                System.out.println("Tumpukan barang kosong.");
+                return null;
+            }
+        }
+```
+### OUTPUT 
+```
+    Tentukan Kapasitas Gudang: 12
+    Kapasitas gudang saat ini adalah 12
+
+    Menu:
+    1. Tambah Barang
+    2. Ambil Barang
+    3. Tampilkan Tumpukan Barang
+    4. Lihat Barang Teratas
+    5. Lihat Barang Terbawah
+    6. Cari Barang
+    7. Keluar
+    Pilih operasi: 1
+    Masukkan kode barang  : 23
+    Masukkan nama barang  : Jaket
+    Masukkan nama kategori: Pakaian
+    Barang Jaket berhasil ditambahkan ke Gudang
+
+    Menu:
+    1. Tambah Barang
+    2. Ambil Barang
+    3. Tampilkan Tumpukan Barang
+    4. Lihat Barang Teratas
+    5. Lihat Barang Terbawah
+    6. Cari Barang
+    7. Keluar
+    Pilih operasi: 1
+    Masukkan kode barang  : 45
+    Masukkan nama barang  : Sprite
+    Masukkan nama kategori: Minuman
+    Barang Sprite berhasil ditambahkan ke Gudang
+
+    Menu:
+    1. Tambah Barang
+    2. Ambil Barang
+    3. Tampilkan Tumpukan Barang
+    4. Lihat Barang Teratas
+    5. Lihat Barang Terbawah
+    6. Cari Barang
+    7. Keluar
+    Pilih operasi: 5
+    Barang terbawah: Jaket
+```
+- ### Method cariBarang digunakan untuk mencari ada atau tidaknya barang berdasarkan kode barangnya atau nama barangnya
+### KODE PROGRAM CARI BARANG DENGAN KODE BARANG
+```java
+    public int CariBarangKode(int cari){
+        int posisi = -1;
+        for(int j = 0; j<tumpukan.length; j++){
+            if(tumpukan[j].kode == cari){
+                posisi = j;
+                break;
+                
+            }
+        }
+        return posisi;
+    }
+
+    public void TampilData(int x, int pos){
+        if (pos != -1){
+            System.out.println("Kode Barang       : " + tumpukan[pos].kode);
+            System.out.println("Nama Barang       : " + tumpukan[pos].nama);
+            System.out.println("Kategori Barang   : " + tumpukan[pos].kategori);
+        } else {
+            System.out.println("Data " + x + " tidak ditemukan");
+        }
+    }
+
+    public void Tampilposisi(int x, int pos){
+        if(pos!= -1){
+            System.out.println("Data: " + x + " ditemukan pada indeks " + pos);
+        } else {
+            System.out.println("Data " + x + " tidak ditemukan ");
+        }
+    }
+```
+### OUTPUT CARI BARANG DENGAN MENGGUNAKAN KODE BARANG
+```
+    Tentukan Kapasitas Gudang: 10
+    Kapasitas gudang saat ini adalah 10
+
+    Menu:
+    1. Tambah Barang
+    2. Ambil Barang
+    3. Tampilkan Tumpukan Barang
+    4. Lihat Barang Teratas
+    5. Lihat Barang Terbawah
+    6. Cari Barang
+    7. Keluar
+    Pilih operasi: 1
+    Masukkan kode barang  : 26
+    Masukkan nama barang  : Jaket
+    Masukkan nama kategori: Pakaian
+    Barang Jaket berhasil ditambahkan ke Gudang
+
+    Menu:
+    1. Tambah Barang
+    2. Ambil Barang
+    3. Tampilkan Tumpukan Barang
+    4. Lihat Barang Teratas
+    5. Lihat Barang Terbawah
+    6. Cari Barang
+    7. Keluar
+    Pilih operasi: 1
+    Masukkan kode barang  : 33
+    Masukkan nama barang  : Pizza
+    Masukkan nama kategori: Makanan
+    Barang Pizza berhasil ditambahkan ke Gudang
+
+    Menu:
+    1. Tambah Barang
+    2. Ambil Barang
+    3. Tampilkan Tumpukan Barang
+    4. Lihat Barang Teratas
+    5. Lihat Barang Terbawah
+    6. Cari Barang
+    7. Keluar
+    Pilih operasi: 6
+    Cari Barang Berdasarkan:
+    1. Kode Barang
+    2. Nama barang
+    Masukkan Pilihan Anda: 1
+    =============================
+    Pencarian berdasarkan Kode Barang
+    Masukkan kode barang: 33
+    Data: 33 ditemukan pada indeks 1
+    Kode Barang       : 33
+    Nama Barang       : Pizza
+    Kategori Barang   : Makanan
+```
+### KODE PROGRAM CARI BARANG DENGAN NAMA BARANG
+```java
+    public void TampilDataString(String x, int pos){
+        if (pos != -1){
+            System.out.println("Kode Barang       : " + tumpukan[pos].kode);
+            System.out.println("Nama Barang       : " + tumpukan[pos].nama);
+            System.out.println("Kategori Barang   : " + tumpukan[pos].kategori);
+        } else {
+            System.out.println("Data " + x + " tidak ditemukan");
+        }
+    }
+
+    public void TampilposisiString(String x, int pos){
+        if(pos!= -1){
+            System.out.println("Data: " + x + " ditemukan pada indeks " + pos);
+        } else {
+            System.out.println("Data " + x + " tidak ditemukan ");
+        }
+    }
+    
+    public int CariBarangNama(String cari2){
+        int posisi = -1;
+        for(int j = 0; j<tumpukan.length; j++){
+            if (tumpukan[j] != null && tumpukan[j].nama.equalsIgnoreCase(cari2)){
+                posisi = j;
+                break;
+            }
+        }
+        return posisi;
+    }
+```
+### OUTPUT CARI BARANG DENGAN MENGGUNAKAN NAMA BARANG
+```
+    Tentukan Kapasitas Gudang: 12
+    Kapasitas gudang saat ini adalah 12
+
+    Menu:
+    1. Tambah Barang
+    2. Ambil Barang
+    3. Tampilkan Tumpukan Barang
+    4. Lihat Barang Teratas
+    5. Lihat Barang Terbawah
+    6. Cari Barang
+    7. Keluar
+    Pilih operasi: 1
+    Masukkan kode barang  : 23
+    Masukkan nama barang  : Bakso
+    Masukkan nama kategori: Makanan
+    Barang Bakso berhasil ditambahkan ke Gudang
+
+    Menu:
+    1. Tambah Barang
+    2. Ambil Barang
+    3. Tampilkan Tumpukan Barang
+    4. Lihat Barang Teratas
+    5. Lihat Barang Terbawah
+    6. Cari Barang
+    7. Keluar
+    Pilih operasi: 1
+    Masukkan kode barang  : 67
+    Masukkan nama barang  : Sweater
+    Masukkan nama kategori: Pakaian
+    Barang Sweater berhasil ditambahkan ke Gudang
+
+    Menu:
+    1. Tambah Barang
+    2. Ambil Barang
+    3. Tampilkan Tumpukan Barang
+    4. Lihat Barang Teratas
+    5. Lihat Barang Terbawah
+    6. Cari Barang
+    7. Keluar
+    Pilih operasi: 1
+    Masukkan kode barang  : 33
+    Masukkan nama barang  : Pulpen
+    Masukkan nama kategori: Peralatan Sekolah
+    Barang Pulpen berhasil ditambahkan ke Gudang
+
+    Menu:
+    1. Tambah Barang
+    2. Ambil Barang
+    3. Tampilkan Tumpukan Barang
+    4. Lihat Barang Teratas
+    5. Lihat Barang Terbawah
+    6. Cari Barang
+    7. Keluar
+    Pilih operasi: 6
+    Cari Barang Berdasarkan:
+    1. Kode Barang
+    2. Nama barang
+    Masukkan Pilihan Anda: 2
+    =============================
+    Pencarian berdasarkan Nama Barang
+    Masukkan nama barang: sweater
+    Data: sweater ditemukan pada indeks 1
+    Kode Barang       : 67
+    Nama Barang       : Sweater
+    Kategori Barang   : Pakaian
+```

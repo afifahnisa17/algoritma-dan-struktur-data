@@ -1,6 +1,5 @@
 package TestSearching;
 
-
 public class PencarianBuku03 {
     Buku listBk[] = new Buku[5];
     int idx;
