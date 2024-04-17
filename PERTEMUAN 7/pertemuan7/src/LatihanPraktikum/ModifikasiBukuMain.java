@@ -101,7 +101,6 @@ public class ModifikasiBukuMain {
                 data.findAllJudulBukuBinarySearch(cari, 0, jumBuku - 1);
                 break;
 
-
             default:
                 System.out.println("Mohon Maaf, pilihan Anda tidak tersedia.");
                 break;

@@ -21,6 +21,5 @@ public class MainSum {
         System.out.println("Total Keuntungan perusahaan selama " + sm.elemen + " bulan adalah " + sm.totalBF(sm.keuntungan));
         System.out.println("=============================================");
         System.out.println("Algoritma Divide Conquer");
-        System.out.println("Total Keuntungan perusahaan selama " + sm.elemen + " bulan adalah " + sm.totalDC(sm.keuntungan, 0, sm.elemen-1));
     }
 }
