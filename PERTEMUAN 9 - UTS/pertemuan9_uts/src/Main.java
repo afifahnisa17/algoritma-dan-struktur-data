@@ -20,7 +20,7 @@ public class Main {
         }
 
         System.out.println();
-        System.out.println("Nilai-nilai yang diurutkan secara Ascending: ");
+        System.out.println("Angka-angka yang diurutkan secara Ascending: ");
         objek.nilaiSelectionSort();
         objek.tampilAll();
         System.out.println();
@@ -32,7 +32,7 @@ public class Main {
         }
 
         System.out.println();
-        System.out.println("Nilai-nilai yang diurutkan secara Descending: ");
+        System.out.println("Angka-angka yang diurutkan secara Descending: ");
         objek.nilaiSelectionSortDes();
         objek.tampilAll();
         System.out.println();

@@ -1,5 +1,5 @@
 <h1 align="center">LAPORAN ALGORITMA DAN STRUKTUR DATA
-PERTEMUAN  8 - UTS
+PERTEMUAN  9 - UTS
 
 <br>
 <img src="picture/logopolinema.png" height="300">
@@ -13,6 +13,8 @@ NIM&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;2341720250
 <br>
 No.Abs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;03</h2>
 
+### SOAL UTS
+<img src="picture/soal UTS.png">
 
 ### HASIL PROGRAM
 
@@ -22,11 +24,11 @@ Angka-angka sebelum diurutkan:
 Masukkan angka yang dicari: 15
 Angka 15 ditemukan pada indeks: 0
 
-Nilai-nilai yang diurutkan secara Ascending:
+Angka-angka yang diurutkan secara Ascending:
 3 5 7 10 10 12 13 15 17 19 22 33 37 45 46 46 49 
 Angka 15 ditemukan pada indeks: 7
 
-Nilai-nilai yang diurutkan secara Descending:
+Angka-angka yang diurutkan secara Descending:
 49 46 46 45 37 33 22 19 17 15 13 12 10 10 7 5 3 
 Angka 15 ditemukan pada indeks: 9
 
