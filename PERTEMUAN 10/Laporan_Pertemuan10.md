@@ -583,4 +583,356 @@ Program tersebut merupakan bentuk pemilihan, jika data yang diisikan berupa nomo
 ## 10.4 Tugas
 <img src="picture/tugas.png">
 
+### KODE PROGRAM CLASS QUEUE MAIN
+```java
+    package Tugas;
 
+    import java.util.Scanner;
+
+    public class QueueMain {
+        public static void menu() {
+            System.out.println("Masukkan operasi yang diinginkan: ");
+            System.out.println("1. Pembeli baru");
+            System.out.println("2. Pembeli keluar");
+            System.out.println("3. Cek Antrian Terdepan");
+            System.out.println("4. Cek Semua Pembeli");
+            System.out.println("5. Cek Antrian Terbelakang");
+            System.out.println("6. Cari Pembeli");
+            System.out.println("--------------------------");
+        }
+
+        public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Masukkan kapasitas Queue: ");
+            int jumlah = sc.nextInt();
+            sc.nextLine(); 
+            
+            Queue antri = new Queue(jumlah);
+            int pilih;
+            
+            do {
+                menu();
+                pilih = sc.nextInt();
+                sc.nextLine(); 
+                switch(pilih){
+                    case 1:
+                        System.out.print("Nama          : ");
+                        String nama = sc.nextLine();
+                        System.out.print("No. Hp        : ");
+                        int noHp = sc.nextInt();
+                        sc.nextLine(); 
+                        Pembeli pembeliBaru = new Pembeli(nama, noHp);
+                        antri.Enqueue(pembeliBaru);
+                        break;
+            
+                    case 2:
+                        if (!antri.IsEmpty()) {
+                            Pembeli pembeliKeluar = antri.Dequeue();
+                            System.out.println("Antrian yang keluar: " + pembeliKeluar.nama + " " + pembeliKeluar.noHp);
+                        } else {
+                            System.out.println("Queue masih kosong");
+                        }
+                        break;
+                    
+                    case 3:
+                        antri.peek();
+                        break;
+                    
+                    case 4:
+                        antri.print();
+                        break;
+                        
+                    case 5:
+                        antri.peekRear();
+                        break;
+                        
+                    case 6:
+                        System.out.print("Masukkan nama pembeli: ");
+                        String cari = sc.nextLine();
+                        antri.peekPosition(cari);
+                        break;
+                }
+            } while (pilih >= 1 && pilih <= 6);
+        }
+        
+        
+    }
+```
+
+### KODE PROGRAM CLASS QUEUE
+```java
+    package Tugas;
+
+    public class Queue {
+        Pembeli[] antrian;
+        int front, rear, size, max;
+
+        public Queue(int n){
+            max = n;
+            antrian = new Pembeli[max];
+            size = 0;
+            front = rear = -1;
+        }
+
+
+        public boolean IsEmpty(){
+            if (size == 0){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public boolean IsFull(){
+            if (size == max){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public void Enqueue (Pembeli antri) {
+            if (IsFull()) {
+                System.out.println("Queue sudah penuh");
+            } else {
+                if (IsEmpty()){
+                    front = rear = 0;
+                } else {
+                    if (rear == max - 1) {
+                        rear = 0;
+                    } else {
+                        rear++;
+                    }
+                }
+                antrian[rear] = antri;
+                size++;
+            }
+        }
+
+        public Pembeli Dequeue(){
+            Pembeli dt = new Pembeli();
+            if (IsEmpty()) {
+                System.out.println("Queue masih kosong");
+            } else {
+                dt = antrian[front];
+                size--;
+                if(IsEmpty()) {
+                    front = rear = -1;
+                } else {
+                    if (front == max -1){
+                        front = 0;
+                    } else {
+                        front++;
+                    }
+                }
+            }
+            return dt;
+        }
+
+        public void print(){
+            if (IsEmpty()){
+                System.out.println("Queue masih kosong");
+            } else {
+
+                int i = front;
+                while (i != rear){
+                    System.out.println(antrian[i].nama + " " + antrian[i].noHp);
+                    i = (i + 1) % max;
+                }
+                System.out.println(antrian[i].nama + " " + antrian[i].noHp);
+                System.out.println("Jumlah elemen = " + size);
+            }
+        }
+
+        public void peek(){
+            if (!IsEmpty()){
+                System.out.println("Elemen Terdepan: " + antrian[front].nama + " " + antrian[front].noHp);
+            } else {
+                System.out.println("Queue masih kosong");
+            }
+        }
+
+        public void peekRear(){
+            int behind = front + (size - 1);
+            if (!IsEmpty()){
+                System.out.println("Elemen Terbelakang: " + antrian[behind].nama + " " + antrian[behind].noHp);
+            } else {
+                System.out.println("Queue masih kosong");
+            }
+        }
+        
+
+        public void peekPosition(String cari){
+            for (int i = 0; i < size; i++) {
+                if (antrian[i].nama.equals(cari)) {
+                    System.out.println("Pembeli " + cari + " ditemukan pada posisi: " + i+1);
+                    return;
+                }
+            }
+            System.out.println("Pembeli " + cari + " tidak ditemukan dalam antrian.");
+        }
+        
+        
+
+        public void daftarPembeli(){
+            if (IsEmpty()){
+                System.out.println("Queue masih kosong");
+            } else {
+                System.out.println("Daftar semua pembeli: ");
+                int i = front;
+                while (i != rear){
+                    System.out.println(antrian[i].nama + " " + antrian[i].noHp);
+                    i = (i + 1) % max;
+                }
+                System.out.println(antrian[i].nama + " " + antrian[i].noHp);
+                System.out.println("Jumlah elemen = " + size);
+            }
+        }
+        
+
+    }
+```
+
+### KODE PROGRAM CLASS PEMBELI
+```java
+    package Tugas;
+
+    public class Pembeli {
+        String nama;
+        int noHp;
+        
+        Pembeli(String nama, int noHp){
+            this.nama = nama;
+            this.noHp = noHp;
+        }
+
+        Pembeli(){
+
+        }
+    }
+```
+
+### OUTPUT
+```
+    Masukkan kapasitas Queue: 8
+    Masukkan operasi yang diinginkan: 
+    1. Pembeli baru
+    2. Pembeli keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Pembeli
+    5. Cek Antrian Terbelakang
+    6. Cari Pembeli
+    --------------------------
+    1
+    Nama          : Afifah
+    No. Hp        : 7756
+    Masukkan operasi yang diinginkan: 
+    1. Pembeli baru
+    2. Pembeli keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Pembeli
+    5. Cek Antrian Terbelakang
+    6. Cari Pembeli
+    --------------------------
+    1
+    Nama          : Angga
+    No. Hp        : 4423
+    Masukkan operasi yang diinginkan: 
+    1. Pembeli baru
+    2. Pembeli keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Pembeli
+    5. Cek Antrian Terbelakang
+    6. Cari Pembeli
+    --------------------------
+    1
+    Nama          : Sarah
+    No. Hp        : 7890
+    Masukkan operasi yang diinginkan:
+    1. Pembeli baru
+    2. Pembeli keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Pembeli
+    5. Cek Antrian Terbelakang
+    6. Cari Pembeli
+    --------------------------
+    1
+    Nama          : Nafa
+    No. Hp        : 4567
+    Masukkan operasi yang diinginkan:
+    1. Pembeli baru
+    2. Pembeli keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Pembeli
+    5. Cek Antrian Terbelakang
+    6. Cari Pembeli
+    --------------------------
+    3
+    Elemen Terdepan: Afifah 7756
+    Masukkan operasi yang diinginkan:
+    1. Pembeli baru
+    2. Pembeli keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Pembeli
+    5. Cek Antrian Terbelakang
+    6. Cari Pembeli
+    --------------------------
+    4
+    Afifah 7756
+    Angga 4423
+    Sarah 7890
+    Nafa 4567
+    Jumlah elemen = 4
+    Masukkan operasi yang diinginkan:
+    1. Pembeli baru
+    2. Pembeli keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Pembeli
+    5. Cek Antrian Terbelakang
+    6. Cari Pembeli
+    --------------------------
+    5
+    Elemen Terbelakang: Nafa 4567
+    Masukkan operasi yang diinginkan:
+    1. Pembeli baru
+    2. Pembeli keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Pembeli
+    5. Cek Antrian Terbelakang
+    6. Cari Pembeli
+    --------------------------
+    6
+    Masukkan nama pembeli: Doni
+    Pembeli Doni tidak ditemukan dalam antrian.
+    Masukkan operasi yang diinginkan:
+    1. Pembeli baru
+    2. Pembeli keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Pembeli
+    5. Cek Antrian Terbelakang
+    6. Cari Pembeli
+    --------------------------
+    6
+    Masukkan nama pembeli: Afifah
+    Pembeli Afifah ditemukan pada posisi: 01
+    Masukkan operasi yang diinginkan:
+    1. Pembeli baru
+    2. Pembeli keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Pembeli
+    5. Cek Antrian Terbelakang
+    6. Cari Pembeli
+    --------------------------
+    2
+    Antrian yang keluar: Afifah 7756
+    Masukkan operasi yang diinginkan:
+    1. Pembeli baru
+    2. Pembeli keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Pembeli
+    5. Cek Antrian Terbelakang
+    6. Cari Pembeli
+    --------------------------
+    7
+    PS D:\ALGORITMA DAN STRUKTUR DATA\PERTEMUAN 10> 
+```
