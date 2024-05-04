@@ -259,3 +259,328 @@ Queue overflow terjadi ketika mencoba menambahkan elemen baru ke dalam queue yan
 ### 7. Pada saat terjadi queue overflow dan queue underflow, program tersebut tetap dapat berjalan dan hanya menampilkan teks informasi. Lakukan modifikasi program sehingga pada saat terjadi queue overflow dan queue underflow, program dihentikan.
 ### Jawaban:
 Untuk menghentikan program saat terjadi queue overflow dan queue underflow, kita dapat menambahkan perintah System.exit(0); setelah mencetak pesan informasi pada kondisi tersebut.
+
+## 10.3.1 Langkah-Langkah Percobaan
+### Class Nasabah
+```java
+    package Praktikum2;
+
+    public class Nasabah {
+        String norek, nama, alamat;
+        int umur;
+        double saldo;
+
+        Nasabah[] data;
+        int front;
+        int rear;
+        int size;
+        int max;
+
+        Nasabah (String norek, String nama, String alamat, int umur, double saldo){
+            this.norek = norek;
+            this.nama = nama;
+            this.alamat = alamat;
+            this.umur = umur;
+            this.saldo = saldo;
+        }
+
+        Nasabah () {
+
+        }
+
+        public Nasabah(int n){
+            max = n;
+            data = new Nasabah[max];
+            size = 0;
+            front = rear = -1;
+        }
+
+        public boolean IsEmpty(){
+            if (size == 0){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public boolean IsFull(){
+            if (size == max){
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+
+        public void peek(){
+            if (!IsEmpty()){
+                System.out.println("Elemen Terdepan: " + data[front].norek + " " + data[front].nama + " " + data[front].alamat + " " + data[front].umur + " " + data[front].saldo);
+            } else {
+                System.out.println("Queue masih kosong");
+            }
+        }
+
+        public void print(){
+            if (IsEmpty()){
+                System.out.println("Queue masih kosong");
+            } else {
+                int i = front;
+                while (i != rear){
+                    System.out.println(data[i].norek + " " + data[i].nama + " " + data[i].alamat + " " + data[i].umur + " " + data[i].saldo); 
+                    i = (i + 1) % max;
+                }
+                System.out.println(data[i].norek + " " + data[i].nama + " " + data[i].alamat + " " + data[i].umur + " " + data[i].saldo);
+                System.out.println("Jumlah elemen = " + size);
+            }
+        }
+
+        public void clear() {
+            if (!IsEmpty()){
+                front = rear = -1;
+                size = 0;
+                System.out.println("Queue berhasil dikosongkan");
+            } else {
+                System.out.println("Queue masih kosong");
+            }
+        }
+
+        public void Enqueue (Nasabah dt) {
+            if (IsFull()) {
+                System.out.println("Queue sudah penuh");
+            } else {
+                if (IsEmpty()){
+                    front = rear = 0;
+                } else {
+                    if (rear == max - 1) {
+                        rear = 0;
+                    } else {
+                        rear++;
+                    }
+                }
+                data[rear] = dt;
+                size++;
+            }
+        }
+
+        public Nasabah Dequeue(){
+            Nasabah dt = new Nasabah();
+            if (IsEmpty()) {
+                System.out.println("Queue masih kosong");
+            } else {
+                dt = data[front];
+                size--;
+                if(IsEmpty()) {
+                    front = rear = -1;
+                } else {
+                    if (front == max -1){
+                        front = 0;
+                    } else {
+                        front++;
+                    }
+                }
+            }
+            return dt;
+        }
+
+    }
+```
+
+### Class QueueMain
+```java
+    package Praktikum2;
+    import java.util.Scanner;
+
+    public class QueueMain {
+        public static void menu() {
+            System.out.println("Masukkan operasi yang diinginkan: ");
+            System.out.println("1. Antrian baru");
+            System.out.println("2. Antrian keluar");
+            System.out.println("3. Cek Antrian Terdepan");
+            System.out.println("4. Cek Semua Antrian");
+            System.out.println("--------------------------");
+        }
+
+        public static void main(String[] args) {
+            Scanner sc03 = new Scanner(System.in);
+            System.out.print("Masukkan kapasitas Queue: ");
+            int jumlah = sc03.nextInt();
+            Nasabah antri = new Nasabah(jumlah);
+            int pilih;
+
+            do {
+                menu();
+                pilih = sc03.nextInt();
+                switch(pilih){
+                    case 1:
+                        System.out.print("No rekening   : ");
+                        String norek = sc03.nextLine();
+                        sc03.nextLine();
+                        System.out.print("Nama          : ");
+                        String nama = sc03.nextLine();
+                        System.out.print("Alamat        : ");
+                        String alamat = sc03.nextLine();
+                        System.out.print("Umur          : ");
+                        int umur = sc03.nextInt();
+                        System.out.print("Saldo         : ");
+                        double saldo = sc03.nextDouble();
+                        Nasabah nb = new Nasabah(norek, nama, alamat, umur, saldo);
+                        sc03.nextLine();
+                        antri.Enqueue(nb);
+                        break;
+
+                    case 2:
+                        Nasabah data = antri.Dequeue();
+                        if (!"".equals(data.norek) && !"".equals(data.nama) && !"".equals(data.alamat) && data.umur != 0 && data.saldo != 0) {
+                            System.out.println("Antrian yang keluar: " + data.norek + " " + data.nama + " " + data.alamat + " " + data.umur + " " + data.saldo);
+                        break;
+                        }
+                    
+                    case 3:
+                        antri.peek();
+                        break;
+                    
+                    case 4:
+                        antri.print();
+                        break;    
+                }
+            } while (pilih == 1 || pilih == 2 || pilih == 3 || pilih == 4);
+
+        }
+    }
+``` 
+
+### 10.3.2 Verifikasi Hasil Percobaan
+```
+    Masukkan kapasitas Queue: 8
+    Masukkan operasi yang diinginkan: 
+    1. Antrian baru
+    2. Antrian keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Antrian
+    --------------------------
+    1
+    No rekening   : 12345
+    Nama          : Dewi
+    Alamat        : Malang
+    Umur          : 23
+    Saldo         : 1300000
+    Masukkan operasi yang diinginkan: 
+    1. Antrian baru
+    2. Antrian keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Antrian
+    --------------------------
+    1
+    No rekening   : 32940
+    Nama          : Susan
+    Alamat        : Surabaya
+    Umur          : 39
+    Saldo         : 42000000
+    Masukkan operasi yang diinginkan:
+    1. Antrian baru
+    2. Antrian keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Antrian
+    --------------------------
+    4
+    Dewi Malang 23 1300000.0
+    Susan Surabaya 39 4.2E7
+    Jumlah elemen = 2
+    Masukkan operasi yang diinginkan:
+    1. Antrian baru
+    2. Antrian keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Antrian
+    --------------------------
+    PS D:\ALGORITMA DAN STRUKTUR DATA\PERTEMUAN 10> 
+```
+## 10.3.3 Pertanyaan
+### 1. Pada class QueueMain, jelaskan fungsi IF pada potongan kode program berikut!
+```java
+    if (!"".equals(data.norek) && !"".equals(data.nama) && !"".equals(data.alamat) && data.umur != 0 && data.saldo != 0) {
+        System.out.println("Antrian yang keluar: " + data.norek + " " + data.nama + " " + data.alamat + " " + data.umur + " " + data.saldo);
+        break;
+    }
+```
+### Jawaban
+Program tersebut merupakan bentuk pemilihan, jika data yang diisikan berupa nomor rekening, nama, alamat, dan saldo tidak kosong, maka program akan mencetak informasi antrian yang keluar yang terdiri dari nomor rekening, nama, alamat, umur dan saldo, setelah itu, program akan keluar dari list.
+
+### 2. Lakukan modifikasi program dengan menambahkan method baru bernama peekRear pada class Queue yang digunakan untuk mengecek antrian yang berada di posisi belakang! Tambahkan pula daftar menu 5. Cek Antrian paling belakang pada class QueueMain sehingga method peekRear dapat dipanggil!
+### Jawaban:
+### Kode Program
+```java
+    public void peekRear(){
+            int behind = front + (size - 1);
+            if (!IsEmpty()){
+                System.out.println("Elemen Terbelakang: " + data[behind].norek + " " + data[behind].nama + " " + data[behind].alamat + " " + data[behind].umur + " " + data[behind].saldo);
+            } else {
+                System.out.println("Queue masih kosong");
+            }
+        }
+```
+
+### Output:
+```
+    Masukkan kapasitas Queue: 8
+    Masukkan operasi yang diinginkan:
+    1. Antrian baru
+    2. Antrian keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Antrian
+    5. Cek Antrian Terbelakang
+    --------------------------
+
+    1
+    No rekening   : 12345
+    Nama          : Dewi
+    Alamat        : Malang
+    Umur          : 23
+    Saldo         : 1300000
+    Masukkan operasi yang diinginkan:
+    1. Antrian baru
+    2. Antrian keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Antrian
+    5. Cek Antrian Terbelakang
+    --------------------------
+    1
+    No rekening   : 32940
+    Nama          : Susan
+    Alamat        : Surabaya
+    Umur          : 39
+    Saldo         : 4200000
+    Masukkan operasi yang diinginkan:
+    1. Antrian baru
+    2. Antrian keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Antrian
+    5. Cek Antrian Terbelakang
+    --------------------------
+    1
+    No rekening   : 34789
+    Nama          : Afifah
+    Alamat        : Nganjuk
+    Umur          : 19
+    Saldo         : 1300000
+    Masukkan operasi yang diinginkan:
+    1. Antrian baru
+    2. Antrian keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Antrian
+    5. Cek Antrian Terbelakang
+    --------------------------
+    5
+    Elemen Terbelakang:  Afifah Nganjuk 19 1300000.0
+    Masukkan operasi yang diinginkan:
+    1. Antrian baru
+    2. Antrian keluar
+    3. Cek Antrian Terdepan
+    4. Cek Semua Antrian
+    5. Cek Antrian Terbelakang
+    --------------------------
+    PS D:\ALGORITMA DAN STRUKTUR DATA\PERTEMUAN 10> 
+```
+## 10.4 Tugas
+<img src="picture/tugas.png">
+
+
