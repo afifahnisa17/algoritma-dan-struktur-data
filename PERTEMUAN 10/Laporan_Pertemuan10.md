@@ -857,7 +857,7 @@ Program tersebut merupakan bentuk pemilihan, jika data yang diisikan berupa nomo
     6. Cari Pembeli
     --------------------------
     1
-    Nama          : Nafa
+    Nama          : Nafaperem
     No. Hp        : 4567
     Masukkan operasi yang diinginkan:
     1. Pembeli baru
