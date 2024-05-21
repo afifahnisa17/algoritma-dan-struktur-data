@@ -148,3 +148,141 @@ Variabel  "temp" sering digunakan untuk menyimpan referensi sementara ke node sa
 ```
 Kode tersebut digunakan untuk memeriksa apakah node yang ditunjuk oleh `temp.next` adalah node terakhir dalam linked list atau tidak. Jika `temp.next.next` adalah `null`, ini menunjukkan bahwa `temp.next` adalah node terakhir dalam linked list, karena tidak ada node setelahnya. Dalam konteks ini, kode `tail = temp.next;` mengatur `tail` ke node terakhir dalam linked list, karena kita telah menyisipkan node baru setelah node `temp`, sehingga node baru tersebut sekarang menjadi node terakhir dalam linked list. Dengan cara ini, kita memastikan bahwa `tail` selalu menunjuk ke node terakhir yang valid dalam linked list setelah operasi penyisipan.
 ```
+
+## 2.2 Modifikasi Elemeen Pada Single Linked List
+## 2.2.1 Langkah-Langkah PErcobaan
+### Class SingleLinkedList
+```java
+    int getData(int index){
+        Node tmp = head;
+        for(int i = 0; i<index; i++){
+            tmp = tmp.next;
+        }
+        return tmp.data;
+    }
+
+    public int indexOf(int key) {
+        Node temp = head;
+        int index = 0;
+        while(temp != null && temp.data != key) {
+            temp = temp.next;
+            index++;
+        }
+    
+        if(temp == null) {
+            return -1;
+        } else {
+            return index;
+        }
+    }
+
+    public void removeFirst() {
+        if(isEmpty()) {
+            System.out.println("Linked List masih kosong, tidak dapat dihapus!");
+        } else if(head == tail) {
+            head = tail = null;
+        } else {
+            head = head.next;
+        }
+    }
+
+    public void removeLast() {
+        if(isEmpty()) {
+            System.out.println("Linked List masih kosong, tidak dapat dihapus!");
+        } else if(head == tail) {
+            head = tail = null;
+        } else {
+            Node temp = head;
+            while(temp.next != tail) {
+                temp = temp.next;
+            }
+            temp.next = null;
+            tail = temp;
+        }
+    }
+
+    public void remove(int key) {
+        if(isEmpty()) {
+            System.out.println("Linked List masih kosong, tidak dapat dihapus!");
+        } else {
+            Node temp = head;
+            while(temp != null) {
+                if((temp.data == key) && (temp == head)) {
+                    this.removeFirst();
+                    break;
+                } else if(temp.next.data == key) {
+                    temp.next = temp.next.next;
+                    if(temp.next == null) tail = temp;
+                    break;
+                }
+                temp = temp.next;
+            }
+        }
+    }
+
+    public void removeAt(int index) {
+        if(index < 0) {
+            System.out.println("Indeks salah!");
+        } else if(index == 0) {
+            removeFirst();
+        } else {
+            Node temp = head;
+            for(int i = 0; i < index - 1; i++) {
+                if(temp.next == null) break;
+                temp = temp.next;
+            }
+            temp.next = temp.next.next;
+            if(temp.next == null) tail = temp;
+        }
+    }
+```
+### Class SLLMain
+```java
+System.out.println("Data pada index ke-1= " + singLL.getData(1));
+        System.out.println("Data 3 berada pada index ke-"+singLL.indexOf(760));
+
+        singLL.remove(999);
+        singLL.print();
+        singLL.removeAt(0);
+        singLL.print();
+        singLL.removeFirst();
+        singLL.print();
+        singLL.removeLast();
+        singLL.print();
+```
+## 2.2.2 Verifikasi Hasil Percobaan
+```
+    linked List Kosong
+    Isi Linked List:      890
+    Isi Linked List:      890       760
+    Isi Linked List:      700       890     760
+    Isi Linked List:      700       999     890   760
+    Isi Linked List:      700       999     890   833      760
+    Data pada index ke-1= 999
+    Data 3 berada pada index ke-4
+    Isi Linked List:      700       890     833   760
+    Isi Linked List:      890       833     760
+    Isi Linked List:      833       760
+    Isi Linked List:      833
+    PS D:\ALGORITMA DAN STRUKTUR DATA\PERTEMUAN 11>
+```
+
+## 2.2.3 Pertanyaan
+### 1. Mengapa digunakan keyword break pada fungsi remove? Jelaskan!
+### Jawaban:
+```
+Keyword break digunakan pada fungsi remove untuk menghentikan iterasi lebih awal ketika node yang mengandung data yang cocok dengan kunci (key) ditemukan dan dihapus.
+```
+### 2. Jelaskan kegunaan kode dibawah ini pada method remove!
+```java
+else if(temp.next.data == key) {
+                    temp.next = temp.next.next;
+```
+### Jawaban:
+```
+Kode ini digunakan untuk menghapus node dari linked list yang memiliki nilai data (data) yang cocok dengan kunci (key), namun bukan node pertama.
+```
+
+### Tugas
+<img src="picture/tugas.png">
+
