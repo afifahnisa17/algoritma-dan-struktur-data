@@ -12,7 +12,7 @@ public class motoGP_Main {
 
         // Informasi: 
         // Total ada 42 Pertandingan MotoGP dalam satu musim, masing2 diadakan di hari sabtu dan minggu. 
-        // Untuk Pertandingan hari Sabtu, poinnya berkisar dari 1-15 (Biasa disebut dengan Sprint)
+        // Untuk Pertandingan hari Sabtu, poinnya berkisar dari 1-12 (Biasa disebut dengan Sprint)
         // Untuk Pertandingan hari Minggu, Poinnya berkisar dari 1-25 
         // Dalam Tugas kali ini, saya menggunakan 10 sampel pertandingan, dan saya menggunakan hari Minggu 
 
