@@ -286,3 +286,280 @@ Kode ini digunakan untuk menghapus node dari linked list yang memiliki nilai dat
 ### Tugas
 <img src="picture/tugas.png">
 
+### Tugas 1
+### Kode Program
+### Class Mhs
+```java
+    package Tugas1;
+
+    public class Mhs {
+        String mahasiswa, nama;
+        int NIM;
+        Mhs next;
+
+        Mhs(String mahasiswa, int NIM, String nama, Mhs next){
+            this.mahasiswa = mahasiswa;
+            this.NIM = NIM;
+            this.nama= nama;
+            this.next = next;
+        }
+
+    }
+```
+### Class Mhs_Main
+```java
+    package Tugas1;
+
+    public class Mhs_Main {
+        public static void main(String[] args) {
+            SLL_Mhs data = new SLL_Mhs();
+
+            data.addFirst("Mhs1", 111, "Anton");
+            data.insertAfter(111, "Mhs2", 112, "Prita");
+            data.insertAt(3, "Mhs3", 113, "Yusuf");
+            data.insertAfter(113, "Mhs4", 114, "Doni");
+            data.addLast("Mhs5", 115, "Sari");
+            data.print();
+        }
+    }
+```
+### Class SLL_Mhs
+```java
+    package Tugas1;
+
+    public class SLL_Mhs {
+        Mhs head, tail;
+
+        boolean isEmpty(){
+            return head == null;
+        }
+
+        void print(){
+            if(!isEmpty()){
+                Mhs tmp = head;
+                while (tmp != null){
+                    System.out.println("Urutan      : " + tmp.mahasiswa);
+                    System.out.println("NIM         : " + tmp.NIM);
+                    System.out.println("Nama        : " + tmp.nama);
+                    System.out.println();
+                    tmp = tmp.next;
+                }
+                System.out.println(" ");
+            } else {
+                System.out.println("linked List Kosong");
+            }
+        }
+
+        public void addFirst(String mahasiswa, int NIM, String nama) {
+            Mhs ndInput = new Mhs(mahasiswa, NIM, nama, null);
+            if(isEmpty()) {
+                head = ndInput;
+                tail = ndInput;
+            } else {
+                ndInput.next = head;
+                head = ndInput;
+            }
+        }
+
+        public void addLast(String mahasiswa, int NIM, String nama) {
+            Mhs ndInput = new Mhs(mahasiswa, NIM, nama, null);
+            if(isEmpty()) {
+                head = ndInput;
+                tail = ndInput;
+            } else {
+                tail.next = ndInput;
+                tail = ndInput;
+            }
+        }
+
+        public void insertAfter(int key, String mahasiswa, int NIM, String nama) {
+            Mhs ndInput = new Mhs(mahasiswa, NIM, nama, null);
+            Mhs temp = head;
+            do {
+                if(temp.NIM == key) {
+                    ndInput.next = temp.next;
+                    temp.next = ndInput;
+                    if(ndInput.next == null) tail = ndInput;
+                    break;
+                }
+                temp = temp.next;
+            } while(temp != null);
+        }
+        
+
+        public void insertAt(int index, String mahasiswa, int NIM, String nama) {
+            if(index < 0) {
+                System.out.println("Indeks salah!");
+            } else if(index == 0) {
+                addFirst(mahasiswa, NIM, nama);
+            } else {
+                Mhs temp = head;
+                for(int i = 0; i < index - 1; i++) {
+                    if(temp.next == null) break;
+                    temp = temp.next;
+                }
+                temp.next = new Mhs(mahasiswa, NIM, nama, temp.next);
+                if(temp.next.next == null) tail = temp.next;
+            }
+        }
+    }
+```
+### Output
+```
+    Urutan      : Mhs1
+    NIM         : 111
+    Nama        : Anton
+
+    Urutan      : Mhs2
+    NIM         : 112
+    Nama        : Prita
+
+    Urutan      : Mhs3
+    NIM         : 113
+    Nama        : Yusuf
+
+    Urutan      : Mhs4
+    NIM         : 114
+    Nama        : Doni
+
+    Urutan      : Mhs5
+    NIM         : 115
+    Nama        : Sari
+
+
+    PS D:\algoritma-dan-struktur-data\PERTEMUAN 11> 
+```
+
+### Tugas 2
+### Kode Program
+### Class Node
+```java
+    package Tugas2;
+
+    public class Node {
+        String mahasiswa, nama;
+        int NIM;
+        Node next;
+
+        Node(String mahasiswa, int NIM, String nama, Node next){
+            this.mahasiswa = mahasiswa;
+            this.NIM = NIM;
+            this.nama= nama;
+            this.next = next;
+        }
+    }
+```
+### Class Main
+```java
+    package Tugas2;
+
+    public class Main{
+        public static void main(String[] args) {
+            SLL_Queue Mhs = new SLL_Queue();
+
+            //menambahkan elemen
+            Mhs.enqueue("Mhs1", 111, "Anton");
+            Mhs.enqueue("Mhs2", 112, "Prita");
+            Mhs.enqueue("Mhs3", 113, "Yusuf");
+            Mhs.enqueue("Mhs4", 114, "Doni");
+            Mhs.enqueue("Mhs5", 115, "Sari");
+            Mhs.print();
+
+            // Hapus elemen dari queue
+            System.out.println();
+            Node node = Mhs.dequeue();
+            System.out.println("Dequeued            : " + node.mahasiswa + ", " + node.NIM + ", " + node.nama);
+
+            // Lihat elemen depan
+            node = Mhs.peek();
+            System.out.println("Peek                : " + node.mahasiswa + ", " + node.NIM + ", " + node.nama);
+
+            // Cek apakah queue kosong
+            System.out.println("Apakah Quqeue Kosong? " + Mhs.isEmpty());
+        }
+}
+```
+### Class SLL_Queue
+```java
+    package Tugas2;
+
+    public class SLL_Queue {
+        Node front, rear;
+
+        //Konstruktor untuk membuat Queue Kosong
+        SLL_Queue(){
+            this.front = this.rear = null;
+        }
+
+        // Method untuk mencetak elemen-elemen di Queue
+        public void print() {
+            if (isEmpty()) {
+                System.out.println("Queue masih kosong");
+            } else {
+                Node current = front;
+                while (current != null) {
+                    System.out.println("Mahasiswa: " + current.mahasiswa + ", NIM: " + current.NIM + ", Nama: " + current.nama);
+                    current = current.next;
+                }
+            }
+        }
+
+        //Method untuk menambahkan elemen ke Queue
+        public void enqueue(String mahasiswa, int NIM, String nama){
+            Node newNode = new Node(mahasiswa, NIM, nama, null);
+
+            //Jika Queue kosong, maka front dan rear adalah node baru
+            if(this.rear == null){
+                this.front = this.rear = newNode;
+                return;
+            }
+
+            //Tambahkan node baru di akhir queue dan ubah rear
+            this.rear.next = newNode;
+            this.rear = newNode;
+        }
+
+        //Method untuk menghapus elemen dari Queue
+        public Node dequeue(){
+            //jika queue kosong, berikan pengecualian
+            if(this.front == null){
+                throw new IllegalStateException("Queue kosng!!");
+            }
+
+            Node temp = this.front;
+            this.front= this.front.next;
+
+            if(this.front == null){
+                this.rear = null;
+            }
+
+            return temp;
+        }
+
+        // Method untuk memeriksa apakah queue kosong
+        public boolean isEmpty() {
+            return this.front == null;
+        }
+
+        // Method untuk mendapatkan elemen depan tanpa menghapusnya
+        public Node peek() {
+            if (this.front == null) {
+                throw new IllegalStateException("Queue is empty");
+            }
+            return this.front;
+        }
+    }
+```
+### Output
+```
+    Mahasiswa: Mhs1, NIM: 111, Nama: Anton
+    Mahasiswa: Mhs2, NIM: 112, Nama: Prita
+    Mahasiswa: Mhs3, NIM: 113, Nama: Yusuf
+    Mahasiswa: Mhs4, NIM: 114, Nama: Doni
+    Mahasiswa: Mhs5, NIM: 115, Nama: Sari
+
+    Dequeued            : Mhs1, 111, Anton
+    Peek                : Mhs2, 112, Prita
+    Apakah Quqeue Kosong? false
+    PS D:\algoritma-dan-struktur-data\PERTEMUAN 11> 
+```
