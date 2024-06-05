@@ -1,3 +1,5 @@
+package PercobaanPraktikum;
+
 public class BinaryTreeArrayMain03 {
     public static void main(String[] args) {
         BinaryTreeArray03 bta = new BinaryTreeArray03();

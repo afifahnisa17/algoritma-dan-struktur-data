@@ -1,3 +1,5 @@
+package PercobaanPraktikum;
+
 public class BinaryTreeArray03 {
     int[] data;
     int idxLast;

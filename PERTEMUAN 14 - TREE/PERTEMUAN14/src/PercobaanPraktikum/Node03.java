@@ -1,3 +1,5 @@
+package PercobaanPraktikum;
+
 public class Node03 {
     int data;
     Node03 left, right;

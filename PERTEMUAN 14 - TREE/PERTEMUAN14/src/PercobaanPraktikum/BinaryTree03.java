@@ -1,3 +1,5 @@
+package PercobaanPraktikum;
+
 public class BinaryTree03 {
     Node03 root;
 

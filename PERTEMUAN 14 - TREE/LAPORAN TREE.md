@@ -370,9 +370,144 @@ No.Abs&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;03</h2>
 ```
 ## 13.4 Tugas Praktikum
 ### 1. Buat method di dalam class BinaryTree yang akan menambahkan node dengan cara rekursif.
+### Jawaban:
+```java
+    // Method untuk menambahkan node secara rekursif
+    public void add(int data) {
+        root = addRecursive(root, data);
+    }
+
+    private Node addRecursive(Node current, int data) {
+        if (current == null) {
+            return new Node(data);
+        }
+
+        if (data < current.data) {
+            current.left = addRecursive(current.left, data);
+        } else if (data > current.data) {
+            current.right = addRecursive(current.right, data);
+        }
+
+        return current;
+    }
+```
 ### 2. Buat method di dalam class BinaryTree untuk menampilkan nilai paling kecil dan yang paling besar yang ada di dalam tree.
+### Jawaban:
+```java
+    // Method untuk menampilkan nilai paling kecil
+    public int findMin() {
+        if (root == null) {
+            throw new RuntimeException("Tree is empty");
+        }
+        return findMinRecursive(root);
+    }
+
+    private int findMinRecursive(Node node) {
+        return node.left == null ? node.data : findMinRecursive(node.left);
+    }
+
+    // Method untuk menampilkan nilai paling besar
+    public int findMax() {
+        if (root == null) {
+            throw new RuntimeException("Tree is empty");
+        }
+        return findMaxRecursive(root);
+    }
+
+    private int findMaxRecursive(Node node) {
+        return node.right == null ? node.data : findMaxRecursive(node.right);
+    }
+```
 ### 3. Buat method di dalam class BinaryTree untuk menampilkan data yang ada di leaf.
+### Jawaban:
+```java
+// Method untuk menampilkan data di leaf
+    public void printLeafNodes() {
+        printLeafNodesRecursive(root);
+    }
+
+    private void printLeafNodesRecursive(Node node) {
+        if (node != null) {
+            if (node.left == null && node.right == null) {
+                System.out.print(node.data + " ");
+            }
+            printLeafNodesRecursive(node.left);
+            printLeafNodesRecursive(node.right);
+        }
+    }
+```
+
 ### 4. Buat method di dalam class BinaryTree untuk menampilkan berapa jumlah leaf yang ada di dalam tree.
+### Jawaban:
+```java
+    // Method untuk menghitung jumlah leaf
+    public int countLeafNodes() {
+        return countLeafNodesRecursive(root);
+    }
+
+    private int countLeafNodesRecursive(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        if (node.left == null && node.right == null) {
+            return 1;
+        }
+        return countLeafNodesRecursive(node.left) + countLeafNodesRecursive(node.right);
+    }
+```
 ### 5. Modifikasi class BinaryTreeArray, dan tambahkan : 
--  method add(int data) untuk memasukan data ke dalam tree 
-- method traversePreOrder() dan traversePostOrder()
+### -   method add(int data) untuk memasukan data ke dalam tree 
+### Jawaban:
+```java
+    // Method untuk memasukkan data ke dalam tree
+    public void add(int data) {
+        if (idxLast + 1 < this.data.length) {
+            this.data[++idxLast] = data;
+        } else {
+            System.out.println("Tree is full!");
+        }
+    }
+
+    void populateData(int data[], int idxLast) {
+        this.data = data;
+        this.idxLast = idxLast;
+    }
+```
+### -   method traversePreOrder() dan traversePostOrder()
+### Jawaban:
+```java
+// Method untuk traversal inorder
+    void traverseInOrder(int idxStart) {
+        if (idxStart <= idxLast) {
+            traverseInOrder(2 * idxStart + 1);
+            System.out.print(data[idxStart] + " ");
+            traverseInOrder(2 * idxStart + 2);
+        }
+    }
+
+    // Method untuk traversal preorder
+    void traversePreOrder(int idxStart) {
+        if (idxStart <= idxLast) {
+            System.out.print(data[idxStart] + " ");
+            traversePreOrder(2 * idxStart + 1);
+            traversePreOrder(2 * idxStart + 2);
+        }
+    }
+
+    // Method untuk traversal postorder
+    void traversePostOrder(int idxStart) {
+        if (idxStart <= idxLast) {
+            traversePostOrder(2 * idxStart + 1);
+            traversePostOrder(2 * idxStart + 2);
+            System.out.print(data[idxStart] + " ");
+        }
+    }
+```
+
+### OUTPUT
+```
+    InOrder: 4 2 5 1 6 3 7 
+    PreOrder: 1 2 4 5 3 6 7 
+    PostOrder: 4 5 2 6 7 3 1 
+    PS D:\algoritma-dan-struktur-data\PERTEMUAN 14 - TREE> 
+```
