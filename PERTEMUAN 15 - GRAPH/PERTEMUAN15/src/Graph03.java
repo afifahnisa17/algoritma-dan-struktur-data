@@ -10,11 +10,10 @@ public class Graph03 {
         }
     }
 
-    public void addEdge(int asal, int tujuan, int jarak){
+    public void addEdge(int asal, int tujuan, int jarak) {
         list[asal].addFirst(tujuan, jarak);
-        
-        
     }
+    
 
     public void degree(int asal) throws Exception{
         int k, totalIn = 0, totalOut = 0;
@@ -90,6 +89,38 @@ public class Graph03 {
             System.out.print("Gedung " + (char)('A' + asal - 1) + " dan " + (char)('A' + tujuan - 1) + " tidak bertetangga");
         }
     }
-    
 
+    public void updateJarak(int asal, int tujuan, int jarak) {
+        list[asal].updateJarak(tujuan, jarak);
+    }
+
+    public void cekGraph(int asal, int tujuan) throws Exception {
+        if (asal < 1 || asal > vertex || tujuan < 1 || tujuan > vertex) {
+            System.out.println("Gedung tidak valid.");
+            return;
+        }
+    
+        boolean found = false;
+        for (int i = 0; i < list[asal-1].size(); i++) {
+            if (list[asal-1].get(i) == tujuan - 1) {
+                found = true;
+                break;
+            }
+        }
+    
+        if (found) {
+            System.out.println("Edge dari Gedung " + (char)('A' + asal - 1) + " ke Gedung " + (char)('A' + tujuan - 1) + " ada.");
+        } else {
+            System.out.println("Edge dari Gedung " + (char)('A' + asal - 1) + " ke Gedung " + (char)('A' + tujuan - 1) + " tidak ada.");
+        }
+    }
+
+    public int hitungEdge() {
+        int edgeCount = 0;
+        for (int i = 0; i < vertex; i++) {
+            edgeCount += list[i].size();
+        }
+        return edgeCount;
+    }
+    
 }

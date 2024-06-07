@@ -5,37 +5,111 @@ public class GraphMain03 {
     public static void main(String[] args) throws Exception{
         Scanner sc03 = new Scanner(System.in);
         Graph03 gedung = new Graph03(6);
+        boolean graph = true;
 
-        gedung.addEdge(0, 1, 50);
-        gedung.addEdge(0, 2, 100);
-        gedung.addEdge(1, 3, 70);
-        gedung.addEdge(2, 3, 40);
-        gedung.addEdge(3, 4, 60);
-        gedung.addEdge(4, 5, 80);
-        gedung.degree(0);
-        gedung.printGraph();
+        while(graph){
+            System.out.println("==========================");
+            System.out.println("           GRAPH         ");
+            System.out.println("==========================");
+            System.out.println("1. Add Edge");
+            System.out.println("2. Remove Edge");
+            System.out.println("3. Degree");
+            System.out.println("4. Print Graph");
+            System.out.println("5. Cek Edge");
+            System.out.println("6. Update Jarak Edge");
+            System.out.println("7. Hitung jumlah Edge dalam graph");
+            System.out.println("8. Keluar");
+            System.out.print("Masukkan pilihan Anda: ");
+            int pilihan = sc03.nextInt();
 
-        gedung.removeEdge(1, 3);
-        gedung.printGraph();
+            switch(pilihan){
+                case 1: 
+                    System.out.print("Masukkan Asal Edge: ");
+                    int asal = sc03.nextInt();
+                    System.out.print("Masukkan Tujuan Edge: ");
+                    int tujuan = sc03.nextInt();
+                    System.out.print("Masukkan Jarak Edge: ");
+                    int jarak = sc03.nextInt();
+                    gedung.addEdge(asal, tujuan, jarak);
+                    System.out.println("Edge baru telah dimasukkan!!");
+                    System.out.println();
+                    break;
 
-        System.out.print("Masukkan Gedung Asal: ");
-        int asal = sc03.nextInt();
-        System.out.print("Masukkan Gedung Tujuan: ");
-        int tujuan = sc03.nextInt();
-        gedung.sejalur(asal, tujuan);
-        System.out.println();
+                case 2:
+                    System.out.println("1. Hapus semua Edge");
+                    System.out.println("2. Hapus edge tertentu");
+                    System.out.print("Masukkan pilihan Anda: ");
+                    pilihan = sc03.nextInt();
 
-        GraphMatriks03 gdg = new GraphMatriks03(4);
-        gdg.makeEdge(0, 1, 50);
-        gdg.makeEdge(1, 0, 60);
-        gdg.makeEdge(1, 2, 70);
-        gdg.makeEdge(2, 1, 80);
-        gdg.makeEdge(2, 3, 40);
-        gdg.makeEdge(3, 0, 90);
-        gdg.printGraph();
-        System.out.println("Hasil penghapusan Edge");
-        gdg.removeEdge(2, 1);
-        gdg.printGraph();
-        gdg.degreeMatriks(2);
+                    switch(pilihan){
+                        case 1:
+                            gedung.removeAllEdges();
+                            System.out.println("Semua Edge Telah dihapus!");
+                            break;
+                        
+                        case 2:
+                            System.out.println("Masukkan Edge yang ingin Anda Hapus");
+                            System.out.print("Asal Edge: ");
+                            asal = sc03.nextInt();
+                            System.out.print("Tujuan Edge: ");
+                            tujuan = sc03.nextInt();
+                            gedung.removeEdge(asal, tujuan);
+                            System.out.println("Edge berhasil dihapus!!");
+                            break;
+
+                        default:
+                            System.out.println("Pilihan Anda tidak valid");
+                            break;
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Masukkan degree yang ingin Anda cari: ");
+                    int degree = sc03.nextInt();
+                    gedung.degree(degree);
+                    break;
+
+                case 4:
+                    System.out.println("Daftar Graph: ");
+                    gedung.printGraph();
+                    break;
+
+                case 5:
+                    System.out.println("Cek Edge: ");
+                    System.out.print("Masukkan Gedung Asal: ");
+                    asal = sc03.nextInt();
+                    System.out.print("Masukkan Gedung Tujuan: ");
+                    tujuan = sc03.nextInt();
+                    gedung.cekGraph(asal, tujuan);
+                    break;
+
+                case 6:
+                    System.out.print("Masukkan Gedung Asal: ");
+                    asal = sc03.nextInt();
+                    System.out.print("Masukkan Gedung Tujuan: ");
+                    tujuan = sc03.nextInt();
+                    System.out.print("Masukkan Jarak Baru: ");
+                    jarak = sc03.nextInt();
+                    gedung.updateJarak(asal - 1, tujuan - 1, jarak);
+                    System.out.println("Jarak baru telah di update!");
+                    break;
+
+                case 7: 
+                    System.out.println("Menghitung jumlah edge dalam graph...");
+                    int edgeCount = gedung.hitungEdge();
+                    System.out.println("Jumlah edge dalam graf: " + edgeCount);
+                    break;
+
+                case 8: 
+                    graph = false;
+                    break;
+
+                default:
+                    System.out.println("Pilihan Anda tidak valid.");
+                    break;
+            }
+
+        }
+
     }
 }

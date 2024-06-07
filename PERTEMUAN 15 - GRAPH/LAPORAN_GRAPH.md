@@ -512,16 +512,333 @@ public void removeEdge(int asal, int tujuan){
 ### Pengguna dapat memilih menu program melalui input Scanner
 ### Jawaban: 
 ```java
+    import java.util.Scanner;
+
+    public class GraphMain03 {
+    
+    public static void main(String[] args) throws Exception{
+        Scanner sc03 = new Scanner(System.in);
+        Graph03 gedung = new Graph03(6);
+        boolean graph = true;
+
+        while(graph){
+            System.out.println("==========================");
+            System.out.println("           GRAPH         ");
+            System.out.println("==========================");
+            System.out.println("1. Add Edge");
+            System.out.println("2. Remove Edge");
+            System.out.println("3. Degree");
+            System.out.println("4. Print Graph");
+            System.out.println("5. Cek Edge");
+            System.out.println("6. Update Jarak Edge");
+            System.out.println("7. Hitung jumlah Edge dalam graph");
+            System.out.println("8. Keluar");
+            System.out.print("Masukkan pilihan Anda: ");
+            int pilihan = sc03.nextInt();
+
+            switch(pilihan){
+                case 1: 
+                    System.out.print("Masukkan Asal Edge: ");
+                    int asal = sc03.nextInt();
+                    System.out.print("Masukkan Tujuan Edge: ");
+                    int tujuan = sc03.nextInt();
+                    System.out.print("Masukkan Jarak Edge: ");
+                    int jarak = sc03.nextInt();
+                    gedung.addEdge(asal, tujuan, jarak);
+                    System.out.println("Edge baru telah dimasukkan!!");
+                    System.out.println();
+                    break;
+
+                case 2:
+                    System.out.println("1. Hapus semua Edge");
+                    System.out.println("2. Hapus edge tertentu");
+                    System.out.print("Masukkan pilihan Anda: ");
+                    pilihan = sc03.nextInt();
+
+                    switch(pilihan){
+                        case 1:
+                            gedung.removeAllEdges();
+                            System.out.println("Semua Edge Telah dihapus!");
+                            break;
+                        
+                        case 2:
+                            System.out.println("Masukkan Edge yang ingin Anda Hapus");
+                            System.out.print("Asal Edge: ");
+                            asal = sc03.nextInt();
+                            System.out.print("Tujuan Edge: ");
+                            tujuan = sc03.nextInt();
+                            gedung.removeEdge(asal, tujuan);
+                            System.out.println("Edge berhasil dihapus!!");
+                            break;
+
+                        default:
+                            System.out.println("Pilihan Anda tidak valid");
+                            break;
+                    }
+                    break;
+
+                case 3:
+                    System.out.print("Masukkan degree yang ingin Anda cari: ");
+                    int degree = sc03.nextInt();
+                    gedung.degree(degree);
+                    break;
+
+                case 4:
+                    System.out.println("Daftar Graph: ");
+                    gedung.printGraph();
+                    break;
+
+                case 5:
+                    System.out.println("Cek Edge: ");
+                    System.out.print("Masukkan Gedung Asal: ");
+                    asal = sc03.nextInt();
+                    System.out.print("Masukkan Gedung Tujuan: ");
+                    tujuan = sc03.nextInt();
+                    gedung.cekGraph(asal, tujuan);
+                    break;
+
+                case 6:
+                    System.out.print("Masukkan Gedung Asal: ");
+                    asal = sc03.nextInt();
+                    System.out.print("Masukkan Gedung Tujuan: ");
+                    tujuan = sc03.nextInt();
+                    System.out.print("Masukkan Jarak Baru: ");
+                    jarak = sc03.nextInt();
+                    gedung.updateJarak(asal - 1, tujuan - 1, jarak);
+                    System.out.println("Jarak baru telah di update!");
+                    break;
+
+                case 7: 
+                    System.out.println("Menghitung jumlah edge dalam graph...");
+                    int edgeCount = gedung.hitungEdge();
+                    System.out.println("Jumlah edge dalam graf: " + edgeCount);
+                    break;
+
+                case 8: 
+                    graph = false;
+                    break;
+
+                default:
+                    System.out.println("Pilihan Anda tidak valid.");
+                    break;
+            }
+
+        }
+
+    }
+}
 
 ```
 ### 2. Tambahkan method updateJarak pada Percobaan 1 yang digunakan untuk mengubah jarak antara dua node asal dan tujuan!
 ### Jawaban: 
+### Class Double Linked List
 ```java
-
+    public void updateJarak(int tujuan, int jarak) {
+        Node03 temp = head;
+        while (temp != null) {
+            if (temp.data == tujuan) {
+                temp.jarak = jarak;
+                return;
+            }
+            temp = temp.next;
+        }
+        System.out.println("Edge tidak ditemukan.");
+    }
+```
+### Class Graph
+```java
+    public void updateJarak(int asal, int tujuan, int jarak) {
+        list[asal].updateJarak(tujuan, jarak);
+    }
 ```
 ### 3. Tambahkan method hitungEdge untuk menghitung banyaknya edge yang terdapat di dalam graf!
 ### Jawaban: 
 ```java
-
+    public int hitungEdge() {
+        int edgeCount = 0;
+        for (int i = 0; i < vertex; i++) {
+            edgeCount += list[i].size();
+        }
+        return edgeCount;
+    }
 ```
 
+### OUTPUT PROGRAM
+```
+    ==========================
+            GRAPH
+    ==========================
+    1. Add Edge
+    2. Remove Edge
+    3. Degree
+    4. Print Graph
+    5. Cek Edge
+    6. Update Jarak Edge
+    7. Hitung jumlah Edge dalam graph
+    8. Keluar
+    Masukkan pilihan Anda: 1
+    Masukkan Asal Edge: 2
+    Masukkan Tujuan Edge: 3
+    Masukkan Jarak Edge: 45
+    Edge baru telah dimasukkan!!
+
+    ==========================
+            GRAPH
+    ==========================
+    1. Add Edge
+    2. Remove Edge
+    3. Degree
+    4. Print Graph
+    5. Cek Edge
+    6. Update Jarak Edge
+    7. Hitung jumlah Edge dalam graph
+    8. Keluar
+    Masukkan pilihan Anda: 1
+    Masukkan Asal Edge: 3
+    Masukkan Tujuan Edge: 5
+    Masukkan Jarak Edge: 50
+    Edge baru telah dimasukkan!!
+
+    ==========================
+            GRAPH
+    ==========================
+    1. Add Edge
+    2. Remove Edge
+    3. Degree
+    4. Print Graph
+    5. Cek Edge
+    6. Update Jarak Edge
+    7. Hitung jumlah Edge dalam graph
+    8. Keluar
+    Masukkan pilihan Anda: 1
+    Masukkan Asal Edge: 4
+    Masukkan Tujuan Edge: 5
+    Masukkan Jarak Edge: 70
+    Edge baru telah dimasukkan!!
+
+    ==========================
+            GRAPH
+    ==========================
+    1. Add Edge
+    2. Remove Edge
+    3. Degree
+    4. Print Graph
+    5. Cek Edge
+    6. Update Jarak Edge
+    7. Hitung jumlah Edge dalam graph
+    8. Keluar
+    Masukkan pilihan Anda: 3
+    Masukkan degree yang ingin Anda cari: 3
+    InDegree dari Gedung D: 1
+    OutDegree dari Gedung D: 1
+    Degree dari Gedung D: 2
+    ==========================
+            GRAPH
+    ==========================
+    1. Add Edge
+    2. Remove Edge
+    3. Degree
+    4. Print Graph
+    5. Cek Edge
+    6. Update Jarak Edge
+    7. Hitung jumlah Edge dalam graph
+    8. Keluar
+    Masukkan pilihan Anda: 4
+    Daftar Graph:
+    Gedung C terhubung dengan D (45 m),
+    Gedung D terhubung dengan F (50 m),
+    Gedung E terhubung dengan F (70 m),
+
+    ==========================
+            GRAPH
+    ==========================
+    1. Add Edge
+    2. Remove Edge
+    3. Degree
+    4. Print Graph
+    5. Cek Edge
+    6. Update Jarak Edge
+    7. Hitung jumlah Edge dalam graph
+    8. Keluar
+    Masukkan pilihan Anda: 5
+    Cek Edge:
+    Masukkan Gedung Asal: 3
+    Masukkan Gedung Tujuan: 5
+    Edge dari Gedung C ke Gedung E tidak ada.
+    ==========================
+            GRAPH
+    ==========================
+    1. Add Edge
+    2. Remove Edge
+    3. Degree
+    4. Print Graph
+    5. Cek Edge
+    6. Update Jarak Edge
+    7. Hitung jumlah Edge dalam graph
+    8. Keluar
+    Masukkan pilihan Anda: 5
+    Cek Edge:
+    Masukkan Gedung Asal: 3
+    Masukkan Gedung Tujuan: 4
+    Edge dari Gedung C ke Gedung D ada.
+    ==========================
+            GRAPH
+    ==========================
+    1. Add Edge
+    2. Remove Edge
+    3. Degree
+    4. Print Graph
+    5. Cek Edge
+    6. Update Jarak Edge
+    7. Hitung jumlah Edge dalam graph
+    8. Keluar
+    Masukkan pilihan Anda: 6
+    Masukkan Gedung Asal: 3
+    Masukkan Gedung Tujuan: 4
+    Masukkan Jarak Baru: 60
+    Jarak baru telah di update!
+    ==========================
+            GRAPH
+    ==========================
+    1. Add Edge
+    2. Remove Edge
+    3. Degree
+    4. Print Graph
+    5. Cek Edge
+    6. Update Jarak Edge
+    7. Hitung jumlah Edge dalam graph
+    8. Keluar
+    Masukkan pilihan Anda: 4
+    Daftar Graph:
+    Gedung C terhubung dengan D (60 m),
+    Gedung D terhubung dengan F (50 m),
+    Gedung E terhubung dengan F (70 m),
+
+    ==========================
+            GRAPH
+    ==========================
+    1. Add Edge
+    2. Remove Edge
+    3. Degree
+    4. Print Graph
+    5. Cek Edge
+    6. Update Jarak Edge
+    7. Hitung jumlah Edge dalam graph
+    8. Keluar
+    Masukkan pilihan Anda: 7
+    Menghitung jumlah edge dalam graph...
+    Jumlah edge dalam graf: 3
+    ==========================
+            GRAPH
+    ==========================
+    1. Add Edge
+    2. Remove Edge
+    3. Degree
+    4. Print Graph
+    5. Cek Edge
+    6. Update Jarak Edge
+    7. Hitung jumlah Edge dalam graph
+    8. Keluar
+    Masukkan pilihan Anda: 8
+    PS D:\algoritma-dan-struktur-data\PERTEMUAN 15 - GRAPH> 
+```

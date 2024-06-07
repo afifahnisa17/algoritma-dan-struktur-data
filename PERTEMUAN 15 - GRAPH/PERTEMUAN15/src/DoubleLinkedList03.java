@@ -1,3 +1,5 @@
+import org.w3c.dom.Node;
+
 public class DoubleLinkedList03 {
     Node03 head;
     int size;
@@ -32,6 +34,18 @@ public class DoubleLinkedList03 {
             tmp = tmp.next;
         }
         return tmp.jarak;
+    }
+
+    public void updateJarak(int tujuan, int jarak) {
+        Node03 temp = head;
+        while (temp != null) {
+            if (temp.data == tujuan) {
+                temp.jarak = jarak;
+                return;
+            }
+            temp = temp.next;
+        }
+        System.out.println("Edge tidak ditemukan.");
     }
 
     public void addLast (int item, int jarak){
@@ -178,6 +192,7 @@ public class DoubleLinkedList03 {
         }
         return tmp.data;
     }
+
 
     
 }
